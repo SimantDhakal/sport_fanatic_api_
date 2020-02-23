@@ -13,6 +13,8 @@ const eventRoute = require("./routes/event");
 const imageRoute = require("./routes/images");
 const reviewRoute = require("./routes/reviews");
 const teamRoute = require("./routes/team");
+const teamlistRoute = require("./routes/teamList");
+
 
 
 app.use("/uploads", express.static(__dirname + "/uploads/images"));
@@ -49,6 +51,8 @@ app.use("/images",imageRoute);
 app.use('/upload', uploadRouter);
 app.use('/reviews', reviewRoute);
 app.use('/team', teamRoute);
+app.use('/teamList', teamlistRoute);
+
 
 // app.use(auth.verifyUser);
 app.use((err, req, res, next) => {

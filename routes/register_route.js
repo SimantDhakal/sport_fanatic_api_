@@ -137,20 +137,23 @@ router.delete('/deleteuser/:id', function (req, res, next) {
 })
 
 router.post('/getProfile', (req,res,next) => {
-    
   const id = req.body._user_id;
   result=[];
   var data={};
-  Register.find({_id:id}).exec()
+  Register.find({_id:id})
+  .populate("team")
+  .exec()
   .then(doc => {
       if(doc) {
-          data.full_name=doc[0].fullname;
-          data.email=doc[0].email;
-          data.phone=doc[0].number;
-          data.address=doc[0].address;
-          data.image=doc[0].image;
+          console.log(doc);
+    //       data.team_name=doc[0].users.team_name;
+    //       data.full_name=doc[0].fullname;
+    //       data.email=doc[0].email;
+    //       data.phone=doc[0].number;
+    //       data.address=doc[0].address;
+    //       data.image=doc[0].image;
           
-       res.json(data);
+    //    res.json(data);
       }else{
           res.status(404).json({
               message: 'No users found'
