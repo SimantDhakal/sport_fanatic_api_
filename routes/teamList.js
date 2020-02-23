@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const TeamList = require("../models/teamlist");
 const router = express.Router();
 
-
 router.post("/", (req, res, next) => {
     TeamList.create({
         user: req.body.user,
@@ -15,8 +14,6 @@ router.post("/", (req, res, next) => {
         })
         .catch(next);
 });
-
-
 
 router.post('/getProfile', (req,res,next) => {
   const id = req.body._user_id;
@@ -47,6 +44,5 @@ router.post('/getProfile', (req,res,next) => {
       res.status(500).json({error:err});
   });
 });
-
 
 module.exports = router;

@@ -141,19 +141,17 @@ router.post('/getProfile', (req,res,next) => {
   result=[];
   var data={};
   Register.find({_id:id})
-  .populate("team")
   .exec()
   .then(doc => {
       if(doc) {
           console.log(doc);
-    //       data.team_name=doc[0].users.team_name;
-    //       data.full_name=doc[0].fullname;
-    //       data.email=doc[0].email;
-    //       data.phone=doc[0].number;
-    //       data.address=doc[0].address;
-    //       data.image=doc[0].image;
+          data.full_name=doc[0].fullname;
+          data.email=doc[0].email;
+          data.phone=doc[0].number;
+          data.address=doc[0].address;
+          data.image=doc[0].image;
           
-    //    res.json(data);
+       res.json(data);
       }else{
           res.status(404).json({
               message: 'No users found'
@@ -164,6 +162,35 @@ router.post('/getProfile', (req,res,next) => {
       res.status(500).json({error:err});
   });
 });
+
+// testing api
+router.post('/mes', (req,res,next) => {
+    const _id = req.body._id;
+    result=[];
+    var data={};
+    console.log(_id);
+    Register.find({_id:_id})
+    .exec()
+    .then(doc => {
+        if(doc) {
+            console.log(doc);
+            result={};
+            data.fullname=doc[0].user.fullname;
+            data.email=doc[0].user.email;
+            data.phone=doc[0].user.number;
+            data.address=doc[0].user.address;
+            data.image=doc[0].user.image;
+         res.status(200).json(result);
+        }else{
+            res.status(404).json({
+                message: 'No users found'
+            });
+        }
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
+    });
+  });
 
 
 module.exports = router;
