@@ -35,7 +35,7 @@ router.post('/getProfile', (req,res,next) => {
           data.phone=doc[0].user.number;
           data.address=doc[0].user.address;
           data.image=doc[0].user.image;
-          data.team_name=doc[0].team.team_name;
+          data.team_name=doc[0].team.team_name
        res.json(data);
       }else{
           res.status(404).json({
